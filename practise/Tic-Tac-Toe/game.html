@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+  #container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  background-color: dodgerblue;
+  padding: 4px;
+width:30%;
+justify-content: center;
+align-items: center;
+margin:auto;
+}
+#container div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  height: 100px;
+align-content: center;
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Welcome to Tic-Tack-Toe Game</h1>
+  <div id="container">
+    <div onclick="myFunction(0)" data-index="0"></div>
+    <div onclick="myFunction(1)" data-index="1"></div>
+    <div onclick="myFunction(2)" data-index="2"></div>
+    <div onclick="myFunction(3)" data-index="3"></div>
+    <div onclick="myFunction(4)" data-index="4"></div>
+    <div onclick="myFunction(5)" data-index="5"></div>
+    <div onclick="myFunction(6)" data-index="6"></div>
+    <div onclick="myFunction(7)" data-index="7"></div>
+    <div onclick="myFunction(8)" data-index="8"></div>
+  </div>
+  <h1 id="victory"> </h1>
+  <p id="playerTurn"> </p>
+</body>
+<script>
+  let board = ["", "", "", "", "", "", "", "", ""];
+  let currentPlayer = "X";
+  let gameActive = true;
+  const winPattern = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [3, 4, 5], [1, 4, 7], [2, 4, 6], [6, 7, 8], [2, 5, 8]];
+  let winner = false;
+  document.getElementById("playerTurn").innerText = `Current player turn:` + currentPlayer;
+ 
+
+
+  function myFunction(index) {
+    if (!gameActive) {
+      alert("Game over!"); 
+      console.log("Game Over!!!!!!!!!!!!!!!")
+      return;
+    }
+    board[index] = currentPlayer;
+    document.querySelector(`[data-index="${index}"]`).innerText = currentPlayer;
+    check(board);
+    if (winner) {
+      gameActive = false;
+      return;
+    }
+
+    if (currentPlayer === "X") {
+      currentPlayer = "O";
+        if (gameActive==true)
+      {
+ document.getElementById("playerTurn").innerText = `Current player turn:` + currentPlayer;
+      }
+     
+    } else {
+      currentPlayer = "X";    
+       if (gameActive==true)
+      {
+ document.getElementById("playerTurn").innerText = `Current player turn:` + currentPlayer;
+      }
+      
+    }
+    console.log("CurrentPlayer:", currentPlayer);
+
+    
+   
+  }
+
+
+
+  function check(board) {
+
+    for (let key of winPattern) {
+      let [a, b, c] = key;
+      if (board[a] === "O" && board[b] === "O" && board[c] === "O") {
+        console.log("Winner is O");
+        document.getElementById("victory").innerText = "Winner is O";
+        winner = true;
+        gameActive = false;
+      
+        if (winner==true)
+      {
+         document.getElementById("playerTurn").innerText = "We have a winner";
+
+      }
+        return;
+      } else if (board[a] === "X" && board[b] === "X" && board[c] === "X") {
+        console.log("Winner is X");
+        document.getElementById("victory").innerText = "Winner is X";
+        winner = true;
+        gameActive = false;
+        
+       if (winner==true)
+      {
+         document.getElementById("playerTurn").innerText = "We have a winner";
+         
+      }
+        return;
+      } else {
+        winner = false;
+ 
+      }
+    }
+    if (!board.includes("") && !winner) {
+      console.log("This match is a draw!!!");
+      document.getElementById("victory").innerText = "It's a draw!";
+      gameActive = false;
+      return;
+    }
+
+  }
+</script>
+
+</html>

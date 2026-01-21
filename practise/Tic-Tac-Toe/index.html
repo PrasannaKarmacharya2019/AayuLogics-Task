@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Start</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:  #2a5298;
+        
+        }
+
+        .start-button {
+            padding: 2rem 4rem;
+            font-size: 2rem;
+            background:  #4ecdc4;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <button class="start-button" onclick="switchto()">Start Game</button>
+
+    <script>
+        function switchto() {
+            window.location.href = "game.html";
+        }
+    </script>
+</body>
+</html>

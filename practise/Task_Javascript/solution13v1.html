@@ -1,0 +1,57 @@
+<!-- // Debouncing in javascript
+
+
+// let i=0;
+// function increment()
+// {
+//     i++;
+// }
+// const debouncedIncrement=debounce(increment,100);
+// debouncedIncrement()
+// console.log(debouncedIncrement());
+// console.log("increment",i)
+
+
+
+let timer
+function debounce(){
+    clearTimeout(timer)
+    timer=setTimeout(()=>{
+        console.log("data fetched")
+    },1000)
+} -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" oninput="debounce()" placeholder="Enter 1st delay value">
+  <script>
+
+    let timer
+    function debounce() {
+      clearTimeout(timer)
+      timer = setTimeout(function() {
+        console.log('Data Fetched');
+      }, 300)
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

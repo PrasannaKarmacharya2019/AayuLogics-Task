@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Toggle Names</title>
+
+  <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+</style>
+</head>
+<body>
+<div class="card">
+   <!-- <img src="img_avatar2.png" alt="Avatar" style="width:100%"> -->
+   <div class="container">
+   <h2 id="name"></h2>
+  <h3><p id="username"></p></h2>
+  <h3 id="email"></h2>
+  <h3 id="job_title"></h2>
+  <h3 id="division"></h2>
+  <h3 id="organization"></h2>
+  <h3 id="message"></h2>
+      <button onclick="prevName()">Previous</button>
+  <button onclick="nextName()">Next</button>
+<!-- <button  onclick="showAll()" >Show All Names</button> -->
+<a href = "./simpletask2.html">Show All Names</a>
+  <p id="info"></p>
+  </div>
+</div> 
+
+</div>
+  
+
+
+
+  <script>
+    
+ const data =  [
+      {
+        id: 1,
+        full_name: "Aarju Magar",
+        username: "aarju",
+        email: "aarju@example.com",
+        job_title: "Administrator - ICT",
+        division: "Small Business Financial Services",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: false,
+        last_online: "2025-09-16T16:44:49",
+        message: "Sending notification and email in background."
+      },
+      {
+        id: 2,
+        full_name: "Prasanna Karmacharya",
+        username: "prasanna",
+        email: "prasanna@example.com",
+        job_title: "Frontend Developer",
+        division: "Engineering",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: true,
+        last_online: "2025-09-16T17:20:10",
+        message: "User is currently online."
+      },
+      {
+        id: 3,
+        full_name: "Sita Rana",
+        username: "sitar",
+        email: "sita@example.com",
+        job_title: "HR Manager",
+        division: "Human Resources",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: false,
+        last_online: "2025-09-15T15:10:30",
+        message: "Audit access enabled."
+      },
+      {
+        id: 4,
+        full_name: "Ramesh Shrestha",
+        username: "ramesh",
+        email: "ramesh@example.com",
+        job_title: "Accountant",
+        division: "Finance",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: false,
+        last_online: "2025-09-14T11:45:00",
+        message: "Logged out successfully."
+      },
+      {
+        id: 5,
+        full_name: "Nisha Gurung",
+        username: "nisha",
+        email: "nisha@example.com",
+        job_title: "Marketing Executive",
+        division: "Marketing",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: true,
+        last_online: "2025-09-16T18:05:12",
+        message: "User active."
+      },
+      {
+        id: 6,
+        full_name: "Bikash Thapa",
+        username: "bikash",
+        email: "bikash@example.com",
+        job_title: "Support Engineer",
+        division: "IT Support",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: false,
+        last_online: "2025-09-13T09:30:00",
+        message: "User inactive."
+      },
+      {
+        id: 7,
+        full_name: "Maya Adhikari",
+        username: "maya",
+        email: "maya@example.com",
+        job_title: "Designer",
+        division: "Creative",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: true,
+        last_online: "2025-09-16T19:15:00",
+        message: "Working on design."
+      },
+      {
+        id: 8,
+        full_name: "Rajan KC",
+        username: "rajan",
+        email: "rajan@example.com",
+        job_title: "Backend Developer",
+        division: "Engineering",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: false,
+        last_online: "2025-09-16T12:10:00",
+        message: "Database maintenance."
+      },
+      {
+        id: 9,
+        full_name: "Suman Lama",
+        username: "suman",
+        email: "suman@example.com",
+        job_title: "QA Engineer",
+        division: "Quality Assurance",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: true,
+        last_online: "2025-09-16T15:55:00",
+        message: "Testing in progress."
+      },
+      {
+        id: 10,
+        full_name: "Rita Shahi",
+        username: "rita",
+        email: "rita@example.com",
+        job_title: "HR Assistant",
+        division: "Human Resources",
+        organization: "Realhrsoft Pvt.Ltd",
+        is_online: false,
+        last_online: "2025-09-15T10:30:00",
+        message: "HR support."
+      }
+    ]
+
+
+   
+    let index = 0;
+if (index==0)
+{
+  document.getElementById("name").innerText = data[0].full_name;
+}
+  
+    function showName() {
+      document.getElementById("name").innerText = `Name: ${data[index].full_name}`
+      document.getElementById("username").innerText = `UserName: ${data[index].username}`
+      document.getElementById("email").innerText = `Email: ${data[index].email}`  
+      document.getElementById("job_title").innerText = `Job-Title: ${data[index].job_title}`  
+      document.getElementById("division").innerText = `Division: ${data[index].division}`  
+      document.getElementById("message").innerText = `Message: ${data[index].message}`  
+      document.getElementById("info").innerText =
+        `Name ${index + 1} of ${data.length}`;
+    }
+
+    
+    function nextName() {
+      if (index < data.length - 1) {
+        index=index+1;
+        showName();
+      }
+    }
+
+    function prevName() {
+      if (index > 0) {
+        index--;
+        showName();
+      }
+    }
+showName();
+  </script>
+
+</body>
+</html>

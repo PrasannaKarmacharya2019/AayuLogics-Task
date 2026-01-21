@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      background-color: dodgerblue;
+      padding: 10px;
+      width: 35%;
+      height: 400px;
+      margin: auto;
+    }
+
+    #container div {
+      background-color: #f1f1f1;
+      border: 1px solid black;
+      padding: 10px;
+      font-size: 30px;
+      text-align: center;
+      justify-content: center;
+      justify-items: center;
+      margin: 10px 10px 10px 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Welcome to Tic-Tack-Toe Game</h1>
+  <div id="container">
+
+  </div>
+<h1 id="victory"> </h1>
+</body>
+<script>
+  let board = ["", "", "", "", "", "", "", "", ""];
+ 
+  const winPattern = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [3, 4, 5], [1, 4, 7], [2, 4, 6], [6, 7, 8], [2, 5, 8]];
+  let winner = false;
+ 
+    for (let i = 0; i < board.length; i++) {
+      console.log("turn number:", i);
+      if (i % 2 == 0) {
+        
+        const input = prompt("Enter value between 0 and 8 for User 'X':");
+   let n = Number(input);
+        if (board[n] === "") {
+          board[n] = "X";
+     
+          let win = check(board);
+          if (winner==true)
+              break;
+         
+        }
+        else {
+          alert("Invalid move, retry step again for player X");
+          i--;
+        }
+
+        // console.log(board);
+
+      }
+      else {
+
+        const input = prompt("Enter value between 0 and 8 for User 'O':");
+
+
+        let n = Number(input);
+        if (board[n] == "") {
+          board[n] = "O";
+              let win = check(board);
+              if (winner==true)
+              break;
+          }
+      else {
+          alert("Invalid move, retry step again for player O");
+          i--;
+        }
+      }
+    }
+    console.log("Final-board:", board, "After execution typeof:", typeof board);
+  
+  const place = document.getElementById("container")
+  board.forEach(item => {
+    // console.log("item:", item, "board:", board)
+    let list = document.createElement("div")
+    list.innerText = item;
+    place.appendChild(list)
+  })
+
+  function check(board) {
+    for (let key of winPattern) {
+      let [a, b, c] = key;
+      if (board[a] == "O" && board[b] == "O" && board[c] == "O") {
+
+      console.log("Winner is O");
+const victLine=document.getElementById("victory");
+victLine.innerText="Winner is O"
+     winner = true;
+     
+        break;
+      }
+      else if (board[a] == "X" && board[b] == "X" && board[c] == "X") {
+        console.log("Winner is x");
+        const victLine=document.getElementById("victory");
+victLine.innerText="Winner is X"
+        winner = true;
+        break;
+      }
+      else
+        winner = false;
+    }
+    if (winner == false) {
+      console.log("This match is a draw!!!")
+    }
+  }
+
+
+</script>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Toggle Names</title>
+
+  <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+</style>
+</head>
+<body>
+<div class="card">
+   <!-- <img src="img_avatar2.png" alt="Avatar" style="width:100%"> -->
+   <div class="container">
+   <h2 id="name"></h2>
+       <br />
+      <br />
+      <a href="./simpletask.html">Back to individual names</a>
+  </div>
+</div>
+</div>
+    <script>
+const data ={
+  "count": 5,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 7,
+      "full_name": "Aarju Magar",
+      "username": "aarju",
+      "profile_picture": "http://192.168.1.106:8000/static/images/default/female.png",
+      "cover_picture": "http://192.168.1.106:8000/static/images/default/cover.png",
+      "division": {
+        "name": "Small Business Financial Services",
+        "slug": "small-business-financial-services"
+      },
+      "job_title": "Administrator - ICT",
+      "email": "aarju@example.com",
+      "employee_level": "Assistant",
+      "organization": {
+        "name": "Realhrsoft Pvt.Ltd",
+        "abbreviation": "RealHR",
+        "slug": "realhrsoft-pvtltd"
+      },
+      "is_online": false,
+      "last_online": "2025-09-16T16:44:49.696736+05:45",
+      "is_audit_user": false,
+      "is_current": false
+    },
+    {
+      "id": 8,
+      "full_name": "Suman Shrestha",
+      "username": "suman",
+      "profile_picture": "http://192.168.1.106:8000/static/images/default/male.png",
+      "cover_picture": "http://192.168.1.106:8000/static/images/default/cover.png",
+      "division": {
+        "name": "Human Resource",
+        "slug": "human-resource"
+      },
+      "job_title": "HR Officer",
+      "email": "suman@example.com",
+      "employee_level": "Officer",
+      "organization": {
+        "name": "Realhrsoft Pvt.Ltd",
+        "abbreviation": "RealHR",
+        "slug": "realhrsoft-pvtltd"
+      },
+      "is_online": true,
+      "last_online": "2025-09-17T09:12:10.123456+05:45",
+      "is_audit_user": false,
+      "is_current": true
+    },
+    {
+      "id": 9,
+      "full_name": "Nisha Karki",
+      "username": "nisha",
+      "profile_picture": "http://192.168.1.106:8000/static/images/default/female.png",
+      "cover_picture": "http://192.168.1.106:8000/static/images/default/cover.png",
+      "division": {
+        "name": "Finance",
+        "slug": "finance"
+      },
+      "job_title": "Accountant",
+      "email": "nisha@example.com",
+      "employee_level": "Senior",
+      "organization": {
+        "name": "Realhrsoft Pvt.Ltd",
+        "abbreviation": "RealHR",
+        "slug": "realhrsoft-pvtltd"
+      },
+      "is_online": false,
+      "last_online": "2025-09-15T18:30:00.000000+05:45",
+      "is_audit_user": true,
+      "is_current": true
+    },
+    {
+      "id": 10,
+      "full_name": "Ramesh Adhikari",
+      "username": "ramesh",
+      "profile_picture": "http://192.168.1.106:8000/static/images/default/male.png",
+      "cover_picture": "http://192.168.1.106:8000/static/images/default/cover.png",
+      "division": {
+        "name": "Information Technology",
+        "slug": "information-technology"
+      },
+      "job_title": "Software Engineer",
+      "email": "ramesh@example.com",
+      "employee_level": "Mid-Level",
+      "organization": {
+        "name": "Realhrsoft Pvt.Ltd",
+        "abbreviation": "RealHR",
+        "slug": "realhrsoft-pvtltd"
+      },
+      "is_online": true,
+      "last_online": "2025-09-17T11:45:20.654321+05:45",
+      "is_audit_user": false,
+      "is_current": true
+    },
+    {
+      "id": 11,
+      "full_name": "Pooja Thapa",
+      "username": "pooja",
+      "profile_picture": "http://192.168.1.106:8000/static/images/default/female.png",
+      "cover_picture": "http://192.168.1.106:8000/static/images/default/cover.png",
+      "division": {
+        "name": "Marketing",
+        "slug": "marketing"
+      },
+      "job_title": "Marketing Executive",
+      "email": "pooja@example.com",
+      "employee_level": "Executive",
+      "organization": {
+        "name": "Realhrsoft Pvt.Ltd",
+        "abbreviation": "RealHR",
+        "slug": "realhrsoft-pvtltd"
+      },
+      "is_online": false,
+      "last_online": "2025-09-14T14:20:45.789012+05:45",
+      "is_audit_user": false,
+      "is_current": false
+    }
+  ],
+  "message": "Sending notification and email in background."
+}
+
+
+const container=document.getElementById("name")
+data.results.map(item=>{
+  let list=document.createElement("p")
+  list.innerText=item.full_name;
+  container.appendChild(list)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const container= document.getElementById("name");
+// data.results.map(item=>{
+// const list= document.createElement("p");
+// list.innerText=item.full_name;
+//   container.appendChild(list);
+// })
+
+  
+ 
+  </script>
+
+</body>
+</html>

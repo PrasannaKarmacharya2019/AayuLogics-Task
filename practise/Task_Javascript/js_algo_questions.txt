@@ -1,0 +1,230 @@
+// 50 JavaScript Algorithm Questions
+// Focus: Various JS functions, methods, and features (No DOM manipulation)
+
+// ============== ARRAY METHODS ==============
+
+// 1. Find the sum of all even numbers in an array using filter() and reduce()
+const arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// 2. Remove duplicate values from an array using Set
+const arr2 = [1, 2, 2, 3, 4, 4, 5, 6, 6, 7];
+
+// 3. Find the longest string in an array using reduce()
+const arr3 = ["apple", "banana", "cherry", "dragonfruit", "elderberry"];
+
+// 4. Flatten a nested array using flat() or recursion
+const arr4 = [1, [2, 3], [4, [5, 6]], 7];
+
+// 5. Group an array of objects by a property using reduce()
+const people = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 25 },
+  { name: "David", age: 30 }
+];
+
+// ============== STRING METHODS ==============
+
+// 6. Reverse a string without using reverse()
+const str1 = "hello world";
+
+// 7. Check if a string is a palindrome (case-insensitive)
+const str2 = "A man a plan a canal Panama";
+
+// 8. Count the occurrences of each character in a string
+const str3 = "javascript";
+
+// 9. Find the first non-repeating character in a string
+const str4 = "aabbccdeef";
+
+// 10. Convert a string to title case (capitalize first letter of each word)
+const str5 = "the quick brown fox";
+
+// ============== HIGHER-ORDER FUNCTIONS ==============
+
+// 11. Create a function that returns a function (closure) to multiply by a specific number
+// Example: const multiplyBy5 = createMultiplier(5); multiplyBy5(10) // 50
+
+// 12. Implement a curry function that takes a function and returns a curried version
+// Example: const add = (a, b, c) => a + b + c; curriedAdd(1)(2)(3) // 6
+
+// 13. Create a debounce function that delays execution until after a wait period
+// Example: debouncedFn will only execute after 300ms of no calls
+
+// 14. Implement a memoization function to cache results of expensive operations
+// Example: memoize a fibonacci function
+
+// 15. Create a pipe function that composes functions left to right
+// Example: pipe(add1, multiply2, subtract3)(5) // (5+1)*2-3 = 9
+
+// ============== OBJECT METHODS ==============
+
+// 16. Deep clone an object without using JSON methods
+const obj1 = { a: 1, b: { c: 2, d: { e: 3 } } };
+
+// 17. Merge multiple objects into one using Object.assign() or spread operator
+const obj2 = { a: 1, b: 2 };
+const obj3 = { b: 3, c: 4 };
+const obj4 = { c: 5, d: 6 };
+
+// 18. Get all values from a nested object (flatten object values)
+const obj5 = { a: 1, b: { c: 2, d: { e: 3, f: 4 } }, g: 5 };
+
+// 19. Check if two objects are deeply equal
+const obj6 = { a: 1, b: { c: 2 } };
+const obj7 = { a: 1, b: { c: 2 } };
+
+// 20. Transform object keys to camelCase from snake_case
+const obj8 = { first_name: "John", last_name: "Doe", age_in_years: 30 };
+
+// ============== ARRAY ALGORITHMS ==============
+
+// 21. Find the second largest number in an array
+const arr5 = [10, 5, 20, 8, 15, 20];
+
+// 22. Rotate an array to the right by k positions
+const arr6 = [1, 2, 3, 4, 5];
+const k1 = 2; // Result: [4, 5, 1, 2, 3]
+
+// 23. Find all pairs in an array that sum to a target value
+const arr7 = [1, 2, 3, 4, 5, 6];
+const target1 = 7;
+
+// 24. Move all zeros to the end of an array while maintaining order
+const arr8 = [0, 1, 0, 3, 12, 0, 5];
+
+// 25. Find the missing number in an array from 1 to n
+const arr9 = [1, 2, 4, 5, 6]; // Missing: 3
+
+// ============== MATHEMATICAL OPERATIONS ==============
+
+// 26. Check if a number is prime
+const num1 = 17;
+
+// 27. Generate Fibonacci sequence up to n terms using recursion or iteration
+const n1 = 10;
+
+// 28. Find the greatest common divisor (GCD) of two numbers
+const num2 = 48, num3 = 18;
+
+// 29. Calculate factorial using recursion
+const num4 = 5;
+
+// 30. Find all prime numbers up to n (Sieve of Eratosthenes)
+const n2 = 30;
+
+// ============== ARRAY MANIPULATION ==============
+
+// 31. Chunk an array into smaller arrays of specified size
+const arr10 = [1, 2, 3, 4, 5, 6, 7, 8];
+const chunkSize = 3;
+
+// 32. Get the intersection of two arrays
+const arr11 = [1, 2, 3, 4, 5];
+const arr12 = [3, 4, 5, 6, 7];
+
+// 33. Get the difference between two arrays (elements in first but not second)
+const arr13 = [1, 2, 3, 4, 5];
+const arr14 = [3, 4, 5, 6, 7];
+
+// 34. Shuffle an array randomly (Fisher-Yates algorithm)
+const arr15 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// 35. Find the most frequent element in an array
+const arr16 = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4];
+
+// ============== STRING ALGORITHMS ==============
+
+// 36. Check if two strings are anagrams
+const str6 = "listen";
+const str7 = "silent";
+
+// 37. Find the longest substring without repeating characters
+const str8 = "abcabcbb";
+
+// 38. Compress a string (e.g., "aaabbc" -> "a3b2c1")
+const str9 = "aaabbbccccdd";
+
+// 39. Check if a string contains balanced parentheses
+const str10 = "(({}[]))";
+
+// 40. Generate all permutations of a string
+const str11 = "abc";
+
+// ============== MAP & SET ==============
+
+// 41. Find the first duplicate in an array using Set
+const arr17 = [1, 2, 3, 4, 2, 5, 6, 3];
+
+// 42. Count word frequency in a sentence using Map
+const sentence = "the quick brown fox jumps over the lazy dog the fox";
+
+// 43. Create a Map from an array of key-value pairs
+const pairs = [["name", "Alice"], ["age", 25], ["city", "NYC"]];
+
+// 44. Find all unique values across multiple arrays using Set
+const arr18 = [1, 2, 3];
+const arr19 = [2, 3, 4];
+const arr20 = [3, 4, 5];
+
+// 45. Implement a simple cache using Map with expiration time
+// Store values with timestamp and retrieve only if not expired
+
+// ============== ADVANCED CHALLENGES ==============
+
+// 46. Implement a function to deep freeze an object (make it immutable recursively)
+const obj9 = { a: 1, b: { c: 2 } };
+
+// 47. Create a function that sorts an array of objects by multiple properties
+const users = [
+  { name: "Alice", age: 25, score: 85 },
+  { name: "Bob", age: 30, score: 90 },
+  { name: "Charlie", age: 25, score: 95 }
+];
+// Sort by age ascending, then score descending
+
+// 48. Implement a function to find the longest common prefix among an array of strings
+const strings = ["flower", "flow", "flight"];
+
+// 49. Convert a nested array structure into a tree object with parent-child relationships
+const flatArray = [
+  { id: 1, name: "Root", parentId: null },
+  { id: 2, name: "Child1", parentId: 1 },
+  { id: 3, name: "Child2", parentId: 1 },
+  { id: 4, name: "GrandChild", parentId: 2 }
+];
+
+output:{
+  id: 1,
+  name: "Root",
+  children: [
+    {
+      id: 2,
+      name: "Child1",
+      children: [
+        {
+          id: 4,
+          name: "GrandChild",
+          children: []
+        }
+      ]
+    },
+    {
+      id: 3,
+      name: "Child2",
+      children: []
+    }
+  ]
+}
+
+// 50. Implement a function to evaluate a mathematical expression string
+const expression = "2 + 3 * 4 - 5"; // Should return 9
+
+// ============== BONUS TIPS ==============
+// Use: map(), filter(), reduce(), some(), every(), find(), findIndex()
+// Use: Object.keys(), Object.values(), Object.entries(), Object.fromEntries()
+// Use: Array.from(), Array.isArray(), spread operator, destructuring
+// Use: Template literals, arrow functions, default parameters
+// Use: Set, Map, WeakSet, WeakMap
+// Use: Recursion, closures, higher-order functions
+// Use: Math methods, Number methods, String methods
