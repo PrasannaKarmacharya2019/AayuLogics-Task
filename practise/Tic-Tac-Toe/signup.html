@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sign Up</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+                      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
+        }
+
+        button {
+            padding: 14px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: #007BFF;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+        <form id="signup-form">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" required />
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required />
+            
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
+            
+            <button type="submit" id="submit">Sign Up</button>
+        </form>
+        <div class="form-footer">
+            Already have an account? <a href="login.html">Login here</a>
+        </div>
+    </div>
+    <script>
+document.getElementById("submit").addEventListener("click",function signup(){ 
+ event.preventDefault();
+        const username=document.getElementById("username").value;
+        // console.log(username);
+        const password=document.getElementById("password").value;
+        // console.log(password);
+        const confirmpassword=document.getElementById("confirmPassword").value;
+        // console.log(confirmpassword);
+if (password!==confirmpassword)
+{
+    alert("Password does not match");
+    return;
+}
+if (username==""||password==""||confirmpassword=="")
+{
+    alert("All fields are required to fill");
+    return;
+}
+
+// first try
+// localStorage.setItem("Name", username);
+// localStorage.setItem("Password", password);
+
+// should be used
+//  const users = JSON.parse(localStorage.getItem('users')) || [];
+//         let abc= users.push({username,password});     
+//              localStorage.setItem('users', JSON.stringify(users));
+//          alert('User signed up successfully!'); 
+      
+
+// self-created
+   const users=JSON.parse(localStorage.getItem('users'))||[];      
+let abc=users.push({username,password});
+console.log("abc:",abc);
+console.log("value of users:",users); 
+myJSON=JSON.stringify(users);
+console.log("myJSON:",myJSON);
+console.log("local-storage:",localStorage.setItem('users',myJSON));
+ alert('User signed up successfully!'); 
+switchto();
+
+
+})
+
+
+  function switchto() {
+            window.location.href = "login.html";
+        }
+
+        
+    </script>
+</body>
+</html>

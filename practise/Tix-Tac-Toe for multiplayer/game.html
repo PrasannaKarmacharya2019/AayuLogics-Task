@@ -3,6 +3,15 @@
 
 <head>
   <style>
+    .main_container
+    {
+      display: flex;
+      flex-direction: row;
+      /* flex-wrap: wrap; */
+      /* overflow: hidden; */
+      justify-content: space-between;
+       
+    } 
     #container {
       display: grid;
       grid-template-columns: 33% 33% 33%;
@@ -79,6 +88,8 @@
 
     body {
       background-color: aliceblue;
+      
+     
     }
 
     #playerTurn {
@@ -86,13 +97,107 @@
       justify-content: center;
       font-size: larger;
     }
+
+/* CSS for playerlogin */
+ .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            /* width: 100%; */
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        button {
+            padding: 14px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: #007BFF;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
   </style>
 </head>
 
 <body>
 
   <h1>Welcome to Tic-Tac-Toe Game</h1>
+  <p id="playerTurn"> </p>
+ <h1 id="victory"> </h1>
+  <!-- login form for player1 -->
+         <div class="main_container" >
+  <div id="player1">
+    <div class="container">
+                   
+            <form id="signup-form">
+                <label for="username">Username</label>
+                <input type="text" id="username1" placeholder="Enter your username" required />
+
+                <label for="password">Password</label>
+                <input type="password" id="password1" placeholder="Enter your password" required />
+
+                <button type="submit" id="player" onclick="login1(event)">Log In</button>
+            </form>
+           
+        </div>
+  </div>
+   
   <div id="container">
+   
     <div onclick="myFunction(0)" data-index="0"></div>
     <div onclick="myFunction(1)" data-index="1"></div>
     <div onclick="myFunction(2)" data-index="2"></div>
@@ -103,18 +208,78 @@
     <div onclick="myFunction(7)" data-index="7"></div>
     <div onclick="myFunction(8)" data-index="8"></div>
   </div>
-  <h1 id="victory"> </h1>
-  <p id="playerTurn"> </p>
+   
+ 
+
+  <!-- player 2 login form -->
+  <div id="player2">
+     <div class="main_container" >
+  <div id="player2">
+    <div class="container">
+            
+            <form id="signup-form">
+                <label for="username">Username</label>
+                <input type="text" id="username2" placeholder="Enter your username" required />
+
+                <label for="password">Password</label>
+                <input type="password" id="password2" placeholder="Enter your password" required />
+
+                <button type="submit" id="submit" onclick="login2(event)">Log In</button>
+            </form>
+            
+        </div>
+
+  </div>
+  </div>
+ 
 </body>
 <script>
+
+login1(event)
+{
+  event.preventDefault();
+                const usernm = document.getElementById("username1").value;
+                const pass = document.getElementById("password1").value;
+               const users = JSON.parse(localStorage.getItem("users"));
+                 const user = users.find(u => u.username === usernm && u.password === pass);
+                      console.log("Found user is:",user);
+                 if (user) {    
+                                   localStorage.setItem('loggedInUser1', JSON.stringify(user));
+                         alert('Userleft Login successful!');  
+                             
+                      } else {
+                          alert('Invalid username or password');
+                      }
+}
+
+
+
+login2()
+{
+   event.preventDefault();
+                const usernm = document.getElementById("username2").value;
+                const pass = document.getElementById("password2").value;
+               const users = JSON.parse(localStorage.getItem("users"));
+                 const user = users.find(u => u.username === usernm && u.password === pass);
+                      console.log("Found user is:",user);
+                 if (user) {    
+                                   localStorage.setItem('loggedInUser2', JSON.stringify(user));
+                       alert('Userright Login successful!'); 
+                              
+                      } else {
+                          alert('Invalid username or password');
+                      }
+}
+
+
+
+
   let board = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = "X";
   let gameActive = true;
   const winPattern = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [3, 4, 5], [1, 4, 7], [2, 4, 6], [6, 7, 8], [2, 5, 8]];
   let winner = false;
   document.getElementById("playerTurn").innerText = `Current player turn: ` + currentPlayer;
-
-
 
   function myFunction(index) {
     if (!gameActive) {
@@ -146,6 +311,11 @@
     }
     console.log("CurrentPlayer:", currentPlayer);
   }
+
+
+
+
+
 
   function check(board) {
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Window Object</h1>
+<h2>The localStorage Property</h2>
+
+<p><button onclick="clickCounter()" type="button">Click me!</button></p>
+<p><button onclick="reset()" type="button">Reset</button></p>
+
+<p>Score: <span id="demo">0</span></p>
+
+
+
+
+<script>
+document.getElementById("demo").innerHTML = localStorage.clickcount||0;
+
+function clickCounter() {
+  if (localStorage.clickcount) {
+    localStorage.clickcount = Number(localStorage.clickcount)+1;
+  } else {
+    localStorage.clickcount = 1;
+  }
+document.getElementById("demo").innerHTML = Number(localStorage.clickcount||0);
+}
+
+   function reset() {
+            localStorage.clear();
+            document.getElementById("demo").textContent = 0;
+           
+        }
+
+</script>
+
+</body>
+</html>

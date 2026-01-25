@@ -3,36 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Start</title>
+    <title>Score Counter</title>
     <style>
-  /* body {
+        body {
                        background: #f0f4f8;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 2rem;
-        } */
+        }
 
         h1 {
             color: #2c3e50;
             margin-bottom: 0.2rem;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: center;
         }
 
         h2 {
             color: #34495e;
             margin-bottom: 2rem;
             font-size: 1.2rem;
-             display: flex;
-            justify-content: center;
-        }
-        h3
-        {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
         }
 
         .score-container {
@@ -42,9 +32,6 @@
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 400px;
-        display: flex; 
-        flex-direction: column;  
-        margin-bottom: 10px;
         }
 
         .score-display {
@@ -89,7 +76,6 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 20px;
         }
 
         .reset-btn {
@@ -101,47 +87,12 @@
             background: #c0392b;
         }
 
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
-            background:  #82b6f6;
-        
-        }
-
-        .start-button {
-            padding: 1rem 2rem;
-            font-size: 2rem;
-            background:  #4ecdc4;
-            border: none;
-            border-radius: 12px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .start-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
-        }
-       
-    </style>
+        </style>
 </head>
 <body>
-
-     <div class="score-container">
-        <h1>Welcome to Game-Zone</h1>
-        <h2> Players Score</h2>
+    <div class="score-container">
+        <h1>Current Score</h1>
+        <h2>Score for both players</h2>
         
         <div class="score-display player1">
             <div>Player 1</div>
@@ -154,32 +105,26 @@
         </div>
 
         <div class="action-buttons">
-            <button class="reset-btn" onclick="reset()">Reset Score</button>
-
-         
+            <button class="reset-btn" onclick="reset()">Reset</button>
         </div>
-         <h3>For Multiplayer Game:</h3>
-       <button class="start-button" onclick="switchto()">Play Tic-Tac-Toe</button>
-     
- 
     </div>
-      <div class="footer">
-Logout from game: <a href="login.html">Logout</a>
-       </div>
-   
+
     <script>
-
-        // Switch page function
-        function switchto() {
-            window.location.href = "game.html";
-        }
-
-
-// localStorage action function
-         document.getElementById("demo1").textContent = localStorage.clickcount1 || 0;
+       
+        document.getElementById("demo1").textContent = localStorage.clickcount1 || 0;
         document.getElementById("demo2").textContent = localStorage.clickcount2 || 0;
 
-            
+        
+        function clickCounter1() {
+            localStorage.clickcount1 = Number(localStorage.clickcount1) + 1;
+            document.getElementById("demo1").textContent = localStorage.clickcount1;
+        }
+
+        function clickCounter2() {
+            localStorage.clickcount2 = Number(localStorage.clickcount2) + 1;
+            document.getElementById("demo2").textContent = localStorage.clickcount2;
+        }
+
         function reset() {
             localStorage.clear();
             document.getElementById("demo1").textContent = 0;
