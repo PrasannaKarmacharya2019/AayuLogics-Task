@@ -373,8 +373,10 @@
                 console.log("res is", res, "typeof res:", typeof res);
                 const data = res.products;
                 data.forEach(products => {
+                    console.log("Hi I m data:",res);
+                    debugger;
                     // console.log(`The required id is: ${products.thumbnail} and title is: ${products.title}`)
-                    const images = [{ src: products.images, title: products.title }];
+                 const images = [{src:products.images,thumb: products.thumbnail,title: products.title}];
 
                     datas.push(images);
                     const container = document.getElementById("gallery");
@@ -386,10 +388,10 @@
                         const link = document.createElement("a");
                         link.style.cursor = "pointer";
                         const img = document.createElement("img");
-                        img.src = element.src[0];
+                     img.src = element.thumb; 
                         link.appendChild(img);
 
-                        img.addEventListener("click", () => openModel(img.src))
+                     img.addEventListener("click", () => openModel(element.src))
 
                         const description = document.createElement("div")
                         description.className = 'desc';

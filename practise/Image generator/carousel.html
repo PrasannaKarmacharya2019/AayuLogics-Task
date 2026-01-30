@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/88ce2b0d97.js" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .carousel {
+            display: flex;
+            justify-content: space-between;
+            /* overflow-x: hidden; */
+            /* width: 80%; */
+            margin: 0 auto;
+        }
+
+        .carousel-list-items {
+            display: flex;
+            justify-content: space-between;
+            transition: all 0.3s ease-in-out 0s;
+        }
+
+        .carousel-container {
+            overflow-x: hidden;
+        }
+
+        .carousel-list {
+            list-style: none;
+        }
+
+        .carousel-images {
+            padding: 15px;
+            height: 200px;
+        }
+
+        .carousel-button {
+            position: relative;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: 0;
+        }
+
+        .right-button {
+            right: 0;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Product View</h2>
+
+    <div class="carousel">
+        <button class="left-button carousel-button"><i class="fas fa-chevron-left"></i></button>
+        <div class="carousel-container" >
+           <ul class="carousel-list carousel-list-items" id="carousel-list-id">
+</ul>
+            
+        </div>
+        <button class="right-button carousel-button"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <script>
+  const productData = [];
+        fetch('https://dummyjson.com/products')
+            .then(response => response.json())
+            .then(res => {
+                // console.log("res data:",res)
+                products = res.products;
+                // console.log("products",products);
+                products.forEach(element => {
+                    // console.log("element is:",element)
+                    // console.log("element name is:", element.title);
+                    // console.log("element slide link is:", element.images);
+
+                    const image = { src: element.images[0], title: element.title };
+                    productData.push(image);
+                    // debugger;
+                    // console.log("data in image is:",image);
+
+
+                });
+                // debugger;
+
+                for (i in productData) {
+                    var node = document.createElement('li');
+                    console.log("productData:",productData);
+                    var currentSlide = (i == 0 ? 'current-slide' : '');
+                    console.log("for iteration ",i,"current-Slide status:",currentSlide);
+                    node.setAttribute('class', 'carousel-list-item ' + currentSlide);
+                    var carouselImg = document.createElement('img');
+                    carouselImg.setAttribute('class', 'carousel-images');
+                    carouselImg.src = productData[i].src;
+                    // console.log("Here is data:", productData.src)
+                    node.appendChild(carouselImg);
+                    document.getElementById('carousel-list-id').appendChild(node);
+                }
+
+                const track = document.querySelector('.carousel-list-items');
+                const nextButton = document.querySelector('.right-button');
+                const prevButton = document.querySelector('.left-button');
+                let widthToMove = 0;
+
+                // next button effect
+                nextButton.addEventListener('click', (e) => {
+                    let currentSlide = track.querySelector('.current-slide');
+                    let nextSlide;
+                    if (!currentSlide.nextElementSibling) {
+                        nextSlide = document.querySelectorAll('.carousel-list-item')[0];
+                        widthToMove = 0;
+                    } else {
+                        nextSlide = currentSlide.nextElementSibling;
+                        widthToMove += currentSlide.clientWidth;
+                    }
+
+
+                    track.style.transform = `translateX(-${widthToMove + 30}px)`;
+                    currentSlide.classList.remove('current-slide');
+
+                    nextSlide.classList.add('current-slide');
+                });
+// previous button effect
+                prevButton.addEventListener('click', (e) => {
+  let currentSlide = track.querySelector('.current-slide');
+  let prevSlide;
+  
+  if (!currentSlide.previousElementSibling) {
+   
+    const allSlides = document.querySelectorAll('.carousel-list-item');
+    prevSlide = allSlides[allSlides.length - 1];
+
+  
+    widthToMove = prevSlide.offsetLeft;
+  } 
+  else {
+    prevSlide = currentSlide.previousElementSibling;
+    widthToMove -= currentSlide.clientWidth;
+  }
+
+  track.style.transform = `translateX(-${widthToMove + 30}px)`;
+
+  currentSlide.classList.remove('current-slide');
+  prevSlide.classList.add('current-slide');
+});
+
+            });
+
+        // console.log("productData once outside:", productData);
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

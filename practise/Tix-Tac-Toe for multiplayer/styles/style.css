@@ -1,0 +1,65 @@
+ body
+    {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+         justify-content: center;
+     background-color: rgb(221, 242, 253);
+      align-items: center;
+      }
+      #allScores
+      {
+         background-color: rgb(215, 236, 255);
+        width:50%;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+#allScores p
+{
+    margin-left: 20px;
+    font-size: larger;
+    border-bottom: 1px solid #eee;
+    
+}
+ .btnBack {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btnBack {
+            background: #0056b3;
+        }
+        .btnBack:hover
+        {
+            background-color: chartreuse;
+            transition: background-color 0.5s ease-out, transform 0.5s ease-out;
+        }
+        /* .allScores
+        {
+            margin-top: 40px;
+        } */
+         .username {
+            font-weight: bold;
+
+        }
+        .stats {
+            color: #555;
+        }
+        
+        .allScores {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            /* border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); */
+            display: flex;
+            justify-content: space-between;
+            font-size: larger;
+            border-bottom: 1px solid #eee;
+        }

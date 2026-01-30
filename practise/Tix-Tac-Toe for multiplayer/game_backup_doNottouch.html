@@ -3,19 +3,14 @@
 
 <head>
   <style>
-    .stats {
-      color: #555;
-    }
-#score1,#score2
-{
-  display: flex;
-  justify-content: center;
-}
     .main_container {
       display: flex;
       flex-direction: row;
-            align-items: center;
-         }
+      /* flex-wrap: wrap; */
+      /* overflow: hidden; */
+      justify-content: space-between;
+
+    }
 
     #container {
       display: grid;
@@ -23,11 +18,9 @@
       background-color: dodgerblue;
       padding: 4px;
       width: 30%;
-      /* justify-content: center; */
+      justify-content: center;
       align-items: center;
       margin: auto;
-      /* justify-content: space-between; */
-      text-align: center;
     }
 
     #container div {
@@ -38,6 +31,8 @@
       text-align: center;
       height: 100px;
       align-content: center;
+
+
     }
 
     #close-modal-btn {
@@ -86,24 +81,6 @@
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
     }
 
-    .restart-button {
-      padding: 10px 10px;
-      /* font-size: 1.5rem; */
-      background: #4ecd7f;
-      border: none;
-      border-radius: 12px;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .restart-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
-    }
-
-
     h1 {
       display: flex;
       justify-content: center;
@@ -128,11 +105,7 @@
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       /* width: 100%; */
-      /* max-width: 400px; */
-      width: 250px;
-      justify-content: center;
-      /* gap: 60px; */
-        margin: 0 60px;   
+      max-width: 400px;
     }
 
     h2 {
@@ -196,26 +169,6 @@
     .form-footer a:hover {
       text-decoration: underline;
     }
-    
-       #logout {
-      padding: 14px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      display: flex;
-      /* justify-content: center; */
-      /* align-items: center; */
-      margin: 40px auto;
-    }
-
-    #logout:hover {
-      background-color: #0056b3;
-    }
-    
   </style>
 </head>
 
@@ -227,11 +180,10 @@
   <!-- login form for player1 -->
   <div class="main_container">
     <div id="player1">
-
+      <div id="score1"></div>
       <div class="container">
-        <h2 id="currentUser1"></h2>
-        <div id="score1"></div>
-        <!-- <form id="signup-form">
+
+        <form id="signup-form">
           <label for="username">Username</label>
           <input type="text" id="username1" placeholder="Enter your username" required />
 
@@ -239,10 +191,9 @@
           <input type="password" id="password1" placeholder="Enter your password" required />
 
           <button type="submit" id="player" onclick="login1(event)">Log In</button>
-        </form> -->
+        </form>
 
       </div>
-
     </div>
 
     <div id="container">
@@ -262,12 +213,12 @@
 
     <!-- player 2 login form -->
     <div id="player2">
+      <div id="score2"></div>
       <div class="main_container">
         <div id="player2">
           <div class="container">
-            <h2 id="currentUser2"></h2>
-            <div id="score2"></div>
-            <!-- <form id="signup-form">
+
+            <form id="signup-form">
               <label for="username">Username</label>
               <input type="text" id="username2" placeholder="Enter your username" required />
 
@@ -275,33 +226,18 @@
               <input type="password" id="password2" placeholder="Enter your password" required />
 
               <button type="submit" id="submit" onclick="login2(event)">Log In</button>
-            </form> -->
+            </form>
 
           </div>
 
         </div>
-        
       </div>
- </div> 
 
- </div> 
-<button id="logout" >LOGOUT</button>
 </body>
 <script>
-  // let loggedInUser1 = null;
-  // let loggedInUser2 = null;
+  let loggedInUser1 = null;
+  let loggedInUser2 = null;
   let scores = JSON.parse(localStorage.getItem('scores')) || {};
-  let c1 = document.getElementById("currentUser1");
-  let c2 = document.getElementById("currentUser2");
-  const lgout=document.getElementById("logout");
-
-  const loggedInUser1 = JSON.parse(localStorage.getItem("loggedInUser1")) || [];
-  console.log("loggedin User1:", loggedInUser1.username);
-
-  const loggedInUser2 = JSON.parse(localStorage.getItem("loggedInUser2")) || [];
-  console.log("loggedin User2:", loggedInUser2.username);
-  displayScore(loggedInUser1.username, "score1");
-  displayScore(loggedInUser2.username, "score2");
 
   function updateScore(username, isWin) {
     if (!scores[username]) {
@@ -323,42 +259,42 @@
     document.getElementById(divID).innerText = `Wins:${s.wins},  Losses:${s.losses}`;
   }
 
-  // function login1(event) {
-  //   event.preventDefault();
-  //   const usernm = document.getElementById("username1").value;
-  //   const pass = document.getElementById("password1").value;
-  //       const users = JSON.parse(localStorage.getItem("users"))||[];
-  //          const user = users.find(u => u.username === usernm && u.password === pass);
-  //      if (user) {
-  //       localStorage.setItem('loggedInUser1', JSON.stringify(user));
-  //       // console.log("loggedInUser1 is",loggedInUser1);
-  //            loggedInUser1 = user.username;
-  //           //  console.log("loggedUser1 is",loggedUser1)
+  function login1(event) {
+    event.preventDefault();
+    const usernm = document.getElementById("username1").value;
+    const pass = document.getElementById("password1").value;
+        const users = JSON.parse(localStorage.getItem("users"))||[];
+           const user = users.find(u => u.username === usernm && u.password === pass);
+       if (user) {
+        localStorage.setItem('loggedInUser1', JSON.stringify(user));
+        // console.log("loggedInUser1 is",loggedInUser1);
+             loggedInUser1 = user.username;
+            //  console.log("loggedUser1 is",loggedUser1)
+                          displayScore(loggedInUser1, "score1");
+      alert('Userleft Login successful!');
+    } else {
+      alert('Invalid username or password for left user');
+    }
+  }
 
-  //     alert('Userleft Login successful!');
-  //   } else {
-  //     alert('Invalid username or password for left user');
-  //   }
-  // }
-
-  // function login2(event) {
-  //   event.preventDefault();
-  //   const usernm = document.getElementById("username2").value;
-  //   const pass = document.getElementById("password2").value;
-  //   const users = JSON.parse(localStorage.getItem("users"))|| [];
-  //   const user = users.find(u => u.username === usernm && u.password === pass);
-  //   console.log("Found user is:", user);
-  //   if (user) {
-  //     localStorage.setItem('loggedInUser2', JSON.stringify(user));
-  //     loggedInUser2 = user.username;
-
-
-  //     alert('User right Login successful!');
-  //   }
-  //   else {
-  //     alert('Invalid username or password right');
-  //   }
-  // }
+  function login2(event) {
+    event.preventDefault();
+    const usernm = document.getElementById("username2").value;
+    const pass = document.getElementById("password2").value;
+    const users = JSON.parse(localStorage.getItem("users"))|| [];
+    const user = users.find(u => u.username === usernm && u.password === pass);
+    console.log("Found user is:", user);
+    if (user) {
+      localStorage.setItem('loggedInUser2', JSON.stringify(user));
+      loggedInUser2 = user.username;
+      
+      displayScore(loggedInUser2, "score2");
+      alert('User right Login successful!');
+    }
+    else {
+      alert('Invalid username or password right');
+    }
+  }
 
   let board = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = "X";
@@ -369,10 +305,10 @@
   document.getElementById("playerTurn").innerText = `Current player turn: ` + currentPlayer;
 
   function myFunction(index) {
-    // if (!loggedInUser1 || !loggedInUser2) {
-    //   alert("Please login for both player first!!");
-    //   return;
-    // }
+    if (!loggedInUser1 || !loggedInUser2) {
+      alert("Please login for both player first!!");
+      return;
+    }
     if (!gameActive) {
       alert("Game over!");
       console.log("Game Over!!!!!!!!!!!!!!!");
@@ -412,10 +348,10 @@
         winner = true;
         gameActive = false;
         createAndAppendModal(currentPlayer, winner);
-        updateScore(loggedInUser2.username, true);
-        updateScore(loggedInUser1.username, false);
-        // displayScore(loggedInUser1, 'score1');
-        // displayScore(loggedInUser2, 'score2');
+        updateScore(loggedInUser2, true);
+        updateScore(loggedInUser1, false);
+        displayScore(loggedInUser1, 'score1');
+        displayScore(loggedInUser2, 'score2');
 
         if (winner == true) {
           document.getElementById("playerTurn").innerText = "We have a winner";
@@ -430,10 +366,10 @@
         winner = true;
         gameActive = false;
         createAndAppendModal(currentPlayer, winner);
-        updateScore(loggedInUser1.username, true);
-        updateScore(loggedInUser2.username, false);
-        // displayScore(loggedInUser1, 'score1');
-        // displayScore(loggedInUser2, 'score2');
+        updateScore(loggedInUser1, true);
+        updateScore(loggedInUser2, false);
+        displayScore(loggedInUser1, 'score1');
+        displayScore(loggedInUser2, 'score2');
         if (winner == true) {
           document.getElementById("playerTurn").innerText = "We have a winner";
         }
@@ -459,7 +395,7 @@
     // modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;';
     const modalContent = document.createElement('div');
     modalContent.classList.add('modal-content');
-    modalContent.style.cssText = 'background-color: rgba(65, 198, 143, 0.90); padding: 20px; border-radius: 5px; width:30%; height:40%; position:relative; text-align:center;'
+    modalContent.style.cssText = 'background-color: rgba(65, 198, 143, 0.90); padding: 20px; border-radius: 5px; width:30%; height:30%; position:relative; text-align:center;'
 
     if (winner == true) {
       modalContent.innerHTML = ` 
@@ -468,7 +404,6 @@
         
           <button id="close-modal-btn">Close &times</button> 
           <p><button onclick="switchto()" class="start-button">Back to Scores</button></p>
-          <p> <button onclick="switchtoreset()" class="restart-button">Restart Match</button></p>
     `;
     }
     else if (winner == false) {
@@ -477,7 +412,6 @@
     
               <button id="close-modal-btn">Close &times</button> 
              <p> <button onclick="switchto()" class="start-button">Back to Scores</button></p>
-             <p> <button onclick="switchtoreset()" class="restart-button">Restart Match</button></p>
           `;
       modalContent.style.cssText = 'background-color: rgba(172, 221, 73, 0.9); padding: 20px; border-radius: 5px; width:30%; height:30%; position:relative; text-align:center;'
     }
@@ -494,36 +428,11 @@
     });
   }
 
-lgout.addEventListener("click",()=>{
- localStorage.removeItem("loggedInUser1");
-  localStorage.removeItem("loggedInUser2");
-onLogOut();
-})
-
 
   // Switch page function
   function switchto() {
     window.location.href = "score.html";
   }
-
-  function switchtoreset() {
-    window.location.href = "game.html";
-  }
-
- function onLogOut() {
-    window.location.href = "login.html";
-  }
-  c1.innerHTML = ` Player 1:
-
- <span class="stats">${loggedInUser1.username}</span>`;
-
-
-
-  c2.innerHTML = ` Player 2:
-
- <span class="stats">${loggedInUser2.username}</span>`;
-
-
 </script>
 
 </html>
