@@ -10,10 +10,10 @@
     <title>Document</title>
 </head>
 <style>
-     h1
-    {
+    h1 {
         text-align: center;
     }
+
     #gallery {
         justify-content: center;
         grid-template-columns: repeat(4, 1fr);
@@ -71,10 +71,12 @@
         border-radius: 10px;
         position: relative;
         display: flex;
-        flex-direction: column;
+        /* flex-direction: column; */
         align-items: center;
+        justify-content: center;
+
         width: 500px;
-        height: 400px;
+        height: 450px;
     }
 
 
@@ -82,6 +84,7 @@
         width: 300px;
         max-width: 90vw;
         transition: transform 0.3s ease;
+
     }
 
     @keyframes fadeIn {
@@ -110,6 +113,9 @@
 
     }
 
+    .closebtn:hover {
+        color: #353535;
+    }
 
     @media screen and (max-width: 600px) {
         #gallery {
@@ -194,7 +200,7 @@
 
     body {
         font-family: Verdana, sans-serif;
-      
+
     }
 
     .mySlides {
@@ -258,7 +264,7 @@
         top: 0;
     }
 
-   
+
 
     .dot {
         height: 15px;
@@ -337,44 +343,121 @@
         right: 0;
         margin-left: 15px;
     }
+
+    /* CSS for auto casousel */
+    .slider {
+        height: 250px;
+        margin: auto;
+        position: relative;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+    }
+
+    .slider-track {
+        display: flex;
+        width: max-content;
+        animation: scroll 40s linear infinite;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(calc(-250px*9));
+        }
+    }
+
+    .slide {
+        height: 200px;
+        width: 250px;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        perspective: 100px;
+    }
+
+    .slider img {
+        width: 100%;
+        transition: transform 1s;
+    }
+
+    .slider::before,
+    .slider::after {
+        background: linear-gradient(to right, rgb(226, 226, 226) 0%, rgba(124, 124, 124, 0) 100%);
+        content: '';
+        height: 100%;
+        position: absolute;
+        width: 15%;
+        z-index: 2;
+    }
+
+    .slider::before {
+        left: 0%;
+        top: 0;
+    }
+
+    .slider::after {
+        right: 0%;
+        top: 0;
+        transform: rotateZ(180deg);
+    }
+
+    img:hover {
+        transform: translateZ(20px);
+    }
+       
+.slider-track:hover {
+    animation-play-state: paused;
+}
+
 </style>
 
 <body>
- 
+
     <div id="gallery"></div>
     <br />
-   
 
-    <!-- carousel HTML -->
-    <div class="carousel">
+
+    <!-- autoslide carousel -->
+    <div class="slider">
+    </div>
+
+<!-- carousel with slide -->
+<!-- <div class="slideshow-container">
+    </div> -->
+
+ <!--manual carousel HTML -->
+    <!-- <div class="carousel">
         <button class="left-button carousel-button"><i class="fas fa-chevron-left"></i></button>
         <div class="carousel-container">
             <ul class="carousel-list carousel-list-items" id="carousel-list-id">
             </ul>
-
         </div>
-        
         <button class="right-button carousel-button"><i class="fas fa-chevron-right"></i></button>
-    </div>
-     <div class="slideshow-container">
-    </div>
+    </div> -->
+
     <script>
- const header=document.createElement("h1");
-         header.textContent=("Welcome to our Product page");
+        const header = document.createElement("h1");
+        header.textContent = ("Welcome to our Product page");
         document.body.prepend(header);
         let datas = [];
         let zoomLevel = 1;
-       
+
         fetch('https://dummyjson.com/products')
             .then(response => response.json(
-                console.log(response)
+                // console.log(response)
             ))
             .then(res => {
-                console.log("res is", res, "typeof res:", typeof res);
+                // console.log("res is", res, "typeof res:", typeof res);
                 const data = res.products;
                 data.forEach(products => {
+                    // console.log("Hi I m data:", res);
                     // console.log(`The required id is: ${products.thumbnail} and title is: ${products.title}`)
-                    const images = [{ src: products.images, title: products.title }];
+                    const images = [{ src: products.images, thumb: products.thumbnail, title: products.title }];
 
                     datas.push(images);
                     const container = document.getElementById("gallery");
@@ -386,10 +469,10 @@
                         const link = document.createElement("a");
                         link.style.cursor = "pointer";
                         const img = document.createElement("img");
-                        img.src = element.src[0];
+                        img.src = element.thumb;
                         link.appendChild(img);
 
-                        img.addEventListener("click", () => openModel(img.src))
+                        img.addEventListener("click", () => openModel(element.src))
 
                         const description = document.createElement("div")
                         description.className = 'desc';
@@ -407,7 +490,6 @@
                         overlayContainer.className = "overlayContainer";
                         const overlay = document.createElement("div");
                         overlay.className = "overlay";
-
                         const modalImg = document.createElement("img");
                         modalImg.className = "modalImg";
                         modalImg.style.objectFit = "contain";
@@ -425,12 +507,16 @@
                         zoominbtn.style.margin = "5px";
                         zoominbtn.style.cursor = "pointer";
                         zoominbtn.addEventListener("click", () => {
-                            zoomLevel = zoomLevel + 0.2;
-                            modalImg.style.transform = `scale(${zoomLevel})`;
-                            // overlay.style = "top:15%";
+                            if (zoomLevel < 1.5) {
+                                zoomLevel = zoomLevel + 0.2;
+                                modalImg.style.transform = `scale(${zoomLevel})`;
+                                // overlay.style = "top:15%";
+                                console.log("Current zoom level in zoom-in loop:", zoomLevel);
+                            }
 
                         })
                         zoom.appendChild(zoominbtn);
+
                         // zoom out button
                         const zoomoutbtn = document.createElement("button");
                         zoomoutbtn.innerHTML = '<i class="fa-solid fa-magnifying-glass-minus"></i>';
@@ -440,12 +526,11 @@
 
 
                         zoomoutbtn.addEventListener("click", () => {
-                            zoomLevel = zoomLevel - 0.2;
-                            if (zoomLevel < 1) {
-                                zoomLevel = 1;
+                            if (zoomLevel > 1) {
+                                zoomLevel = zoomLevel - 0.2;
                                 modalImg.style.transform = `scale(${zoomLevel})`;
-
                             }
+                            console.log("Current zoom level in zoom out loop:", zoomLevel);
                         });
 
 
@@ -465,7 +550,7 @@
                 });
             })
             .catch(error => console.error('Error:', error));
-        console.log("data is:", datas);
+        // console.log("data is:", datas);
 
 
 
@@ -509,9 +594,9 @@
 
                 for (i in productData) {
                     var node = document.createElement('li');
-                    console.log("productData:", productData);
+                    // console.log("productData:", productData);
                     var currentSlide = (i == 0 ? 'current-slide' : '');
-                    console.log("for iteration ", i, "current-Slide status:", currentSlide);
+                    // console.log("for iteration ", i, "current-Slide status:", currentSlide);
                     node.setAttribute('class', 'carousel-list-item ' + currentSlide);
                     var carouselImg = document.createElement('img');
                     carouselImg.setAttribute('class', 'carousel-images');
@@ -569,10 +654,10 @@
                 });
 
             });
-const footer=document.createElement("div");
-footer.innerText="Our special Products:"
-const carousel = document.querySelector(".carousel");
-document.body.insertBefore(footer, carousel);
+        // const footer = document.createElement("div");
+        // footer.innerText = "Our special Products:"
+        // const carousel = document.querySelector(".carousel");
+        // document.body.insertBefore(footer, carousel);
 
         // content for caroesol
         let slideIndex = 0;
@@ -584,7 +669,7 @@ document.body.insertBefore(footer, carousel);
             .then(res => {
 
                 const products = res.products;
-                console.log("products is:", products);
+                // console.log("products is:", products);
 
                 products.forEach(element => {
                     const slideDiv = document.createElement("div");
@@ -600,13 +685,36 @@ document.body.insertBefore(footer, carousel);
 
                     slideDiv.appendChild(img);
                     slideDiv.appendChild(caption);
-                   
+
                     slideshowContainer.appendChild(slideDiv);
 
 
                 });
                 showSlides();
             });
+        // script data for autocarousel
+        fetch('https://dummyjson.com/products')
+            .then(response => response.json())
+            .then(res => {
+                const products = res.products;
+                const slideTrack = document.createElement("div");
+                const slider = document.getElementsByClassName("slider")[0];
+                slideTrack.className = "slider-track";
+                products.forEach(element => {
+                    const slide = document.createElement("div")
+                    slide.className = "slide";
+                    const imageSlide = document.createElement("img");
+                    imageSlide.src = element.images[0];
+                    slide.appendChild(imageSlide);
+                    slideTrack.appendChild(slide);
+                });
+                slider.appendChild(slideTrack);
+            });
+   const footer = document.createElement("div");
+        footer.innerText = "Our special Products:"
+        const carousel = document.querySelector(".slider");
+        document.body.insertBefore(footer, carousel);
+
 
     </script>
 </body>
